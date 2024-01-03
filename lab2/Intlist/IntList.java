@@ -85,7 +85,8 @@ public class IntList {
         while (sentinel.rest != null) {
             sentinel = sentinel.rest;
         }
-        sentinel.rest=B;
+        if(sentinel!=null)
+            sentinel.rest=B;
         return A;
     }
 
