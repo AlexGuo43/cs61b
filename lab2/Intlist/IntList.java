@@ -88,6 +88,9 @@ public class IntList {
             }
             sentinel.rest=B;
         }
+        else{
+            return B;
+        }
         return A;
     }
 
