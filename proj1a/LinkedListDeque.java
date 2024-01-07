@@ -51,12 +51,15 @@ public class LinkedListDeque<T>{
         if (sentinel.next==null){
             return null;
         }
-        IntNode temp = sentinel.next;
+        IntNode first = sentinel.next;
         sentinel.next=sentinel.next.next;
-        temp.next=null;
-        temp.prev=null;
+        if (sentinel.prev==first){
+            sentinel.prev=sentinel;
+        }
         size--;
-        return temp.item;
+        first.next=null;
+        first.prev=null;
+        return first.item;
     }
     public T removeLast(){
         if (sentinel.next==null){
@@ -64,7 +67,7 @@ public class LinkedListDeque<T>{
         }
         T tempItem = sentinel.prev.item;
         IntNode secondLast= sentinel.prev.prev;
-        sentinel.prev.prev.next=null;
+        secondLast.next=sentinel;
         sentinel.prev = secondLast;
         size--;
         return tempItem;

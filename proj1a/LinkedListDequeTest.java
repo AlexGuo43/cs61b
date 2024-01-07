@@ -98,8 +98,17 @@ public class LinkedListDequeTest {
 		printTestStatus(passed);
 		passed = (lld2.removeFirst()==-1);
 		printTestStatus(passed);
-
-
+		System.out.println("Running auto-grader's test");
+		LinkedListDeque<Integer> lld3 = new LinkedListDeque<Integer>();
+		lld3.addLast(0);
+		lld3.removeLast();
+		lld3.addFirst(2);
+		lld3.removeFirst();
+		lld3.addLast(4);
+		lld3.size();
+		lld3.isEmpty();
+		passed = (lld3.removeLast()==4);
+		printTestStatus(passed);
 
 	}
 
