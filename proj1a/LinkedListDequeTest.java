@@ -74,11 +74,32 @@ public class LinkedListDequeTest {
 		// should not be empty 
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
-		lld1.removeFirst();
+		int removedFirst= lld1.removeFirst();
 		// should be empty 
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
-
+		//removedFirst should be 10
+		passed=(10==removedFirst);
 		printTestStatus(passed);
+
+		System.out.println("Running get test");
+		LinkedListDeque<Integer> lld2 = new LinkedListDeque<Integer>();
+		lld2.addFirst(1);
+		lld2.addFirst(0);
+		lld2.addFirst(-1);
+		lld2.addLast(2);
+		lld2.addLast(3);
+		lld2.addLast(4);
+		passed = (lld2.get(0)==-1);
+		printTestStatus(passed);
+		passed = (lld2.getRecursive(3)==2);
+		printTestStatus(passed);
+		System.out.println("Running add/remove 2 test");
+		passed = (lld2.removeLast()==4);
+		printTestStatus(passed);
+		passed = (lld2.removeFirst()==-1);
+		printTestStatus(passed);
+
+
 
 	}
 

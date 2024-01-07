@@ -1,17 +1,17 @@
 public class LinkedListDeque<T>{
 
-    public class IntNode{
-        public T item;
-        public IntNode next;
-        public IntNode prev;
-        public IntNode (T i, IntNode n, IntNode p){
+    private class IntNode{
+        private T item;
+        private IntNode next;
+        private IntNode prev;
+        private IntNode (T i, IntNode n, IntNode p){
             item=i;
             next=n;
             prev=p;
         }
     }
-    public IntNode sentinel;
-    public int size;
+    private IntNode sentinel;
+    private int size;
     public LinkedListDeque(){
         size=0;
         sentinel = new IntNode(null, null, null);
@@ -20,17 +20,18 @@ public class LinkedListDeque<T>{
     }
     public void addFirst(T item){
         sentinel.next=new IntNode(item, sentinel.next, sentinel);
+        if(size==0){
+            sentinel.prev=sentinel.next;
+        }
         if(size>0){
             sentinel.next.next.prev=sentinel.next;
         }
         size++;
     }
     public void addLast(T item){
-        IntNode temp=sentinel;
-        while (temp.next!=sentinel){
-            temp=temp.next;
-        }
-        temp.next=new IntNode(item, sentinel, temp);
+        IntNode secondLast= sentinel.prev;
+        sentinel.prev.next= new IntNode(item, sentinel, secondLast);
+        sentinel.prev=sentinel.prev.next;
         size++;
     }
     public boolean isEmpty(){
@@ -61,13 +62,12 @@ public class LinkedListDeque<T>{
         if (sentinel.next==null){
             return null;
         }
-        IntNode temp=sentinel;
-        while (temp.next!=sentinel){
-            temp=temp.next;
-        }
-        temp.prev.next=sentinel;
+        T tempItem = sentinel.prev.item;
+        IntNode secondLast= sentinel.prev.prev;
+        sentinel.prev.prev.next=null;
+        sentinel.prev = secondLast;
         size--;
-        return temp.item;
+        return tempItem;
     }
     public T get(int index){
         IntNode temp = sentinel;
@@ -87,7 +87,7 @@ public class LinkedListDeque<T>{
         if(index == 0){
             return temp.item;
         }
-        return getRecursiveHelper(temp.next, index--);
+        return getRecursiveHelper(temp.next, index-1);
     }
 
 }
