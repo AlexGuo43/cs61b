@@ -52,11 +52,14 @@ public class LinkedListDeque<T>{
             return null;
         }
         IntNode first = sentinel.next;
+        sentinel.next.next.prev=sentinel;
         sentinel.next=sentinel.next.next;
         if (sentinel.prev==first){
             sentinel.prev=sentinel;
         }
-        size--;
+        if (size>0){
+            size--;
+        }
         first.next=null;
         first.prev=null;
         return first.item;
@@ -69,7 +72,9 @@ public class LinkedListDeque<T>{
         IntNode secondLast= sentinel.prev.prev;
         secondLast.next=sentinel;
         sentinel.prev = secondLast;
-        size--;
+        if (size>0){
+            size--;
+        }
         return tempItem;
     }
     public T get(int index){

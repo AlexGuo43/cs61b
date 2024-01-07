@@ -103,12 +103,16 @@ public class LinkedListDequeTest {
 		lld3.addLast(0);
 		lld3.removeLast();
 		lld3.addFirst(2);
-		lld3.removeFirst();
-		lld3.addLast(4);
-		lld3.size();
-		lld3.isEmpty();
-		passed = (lld3.removeLast()==4);
+		lld3.addFirst(1);
+		lld3.addLast(3);
+		passed = (lld3.removeFirst()==1);
 		printTestStatus(passed);
+		boolean passed2 = (lld3.get(1)==3);
+		printTestStatus(passed);
+		passed=(lld3.removeLast()==3);
+		printTestStatus(passed);
+		lld3.addLast(4);
+		lld3.addFirst(1);
 
 	}
 
